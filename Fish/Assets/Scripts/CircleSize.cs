@@ -16,5 +16,6 @@ public class CircleSize : MonoBehaviour
     void Update()
     {
         circle.transform.position = new Vector3(0,0,0);
+        circle.transform.localScale = new Vector3(1,1,1);
     }
 }
