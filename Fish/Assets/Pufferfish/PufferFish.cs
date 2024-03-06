@@ -23,7 +23,7 @@ public class PufferFish : MonoBehaviour
     public float numOfObjects = 10.0f;
 
     [SerializeField]
-    private float attackCooldown = 0.0f;
+    private float attackCooldown = 0.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -35,9 +35,6 @@ public class PufferFish : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        
-    
      if(Input.GetKeyDown(KeyCode.F) && attackCooldown <= 0)
      {
        attack();

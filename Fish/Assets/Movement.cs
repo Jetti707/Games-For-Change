@@ -18,7 +18,7 @@ public class Movement : MonoBehaviour
     private float horizontal;
     private float vertical;
 
-    int facingDirection = 1;
+    public static int facingDirection = 1;
 
 
 
@@ -62,10 +62,4 @@ public class Movement : MonoBehaviour
         facingDirection *= -1;
         transform.Rotate(0.0f, 180.0f, 0.0f);
     }
-
-    public void disableChar()
-    {
-
-    }
-
 }
