@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class testScript : MonoBehaviour
+public class Swordfish : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -15,5 +15,4 @@ public class testScript : MonoBehaviour
     {
         
     }
-
 }
