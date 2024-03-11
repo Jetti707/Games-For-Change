@@ -19,4 +19,10 @@ public class testEnemy : MonoBehaviour
         
     }
 
+    private void onCollisionEnter(Collision other){
+        if(other.gameObject.tag.Equals("player")){
+            Debug.Log("hit");
+        }
+    }
+
 }

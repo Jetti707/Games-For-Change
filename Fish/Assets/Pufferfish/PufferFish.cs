@@ -8,9 +8,6 @@ using System;
 public class PufferFish : MonoBehaviour
 {
 
-    private GameObject player;
-
-    private Vector3 playerPos;
 
     //Circle Attack vars
 
@@ -28,7 +25,6 @@ public class PufferFish : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player =  GameObject.Find("player");
         
     }
 
@@ -49,7 +45,6 @@ public class PufferFish : MonoBehaviour
     
     void attack()
     {
-        playerPos = player.transform.position;
 
         float angleStep = 360.0f / numOfObjects;
 
@@ -64,7 +59,7 @@ public class PufferFish : MonoBehaviour
                 float x = Mathf.Cos(angle) * radius;
                 float y = Mathf.Sin(angle) * radius;
 
-                var obj = Instantiate(Circle, playerPos, Quaternion.identity);
+                var obj = Instantiate(Circle, transform.position, Quaternion.identity);
                 var rb = obj.AddComponent<Rigidbody2D>();
                 rb.bodyType = RigidbodyType2D.Kinematic;
                 rb.velocity = new Vector2(x,y) * speed;

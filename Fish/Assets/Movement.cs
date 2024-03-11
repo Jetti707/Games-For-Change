@@ -55,6 +55,14 @@ public class Movement : MonoBehaviour
         }
 
     }
+    void OnCollisionEnter(Collision other){   
+    Debug.Log("hit1");
+    if(other.gameObject.tag == "Ground")
+    {
+        Debug.Log("hit");
+        other.gameObject.GetComponent<testEnemy>().Health-= 1;
+    }
+  }
 
   
     void Flip()
