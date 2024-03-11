@@ -10,6 +10,8 @@ public class Swordfish : MonoBehaviour
     public LayerMask objects;
     public LayerMask Enemies;
     private int facingDirection;
+    public GameObject swordAttack;
+    public int attackVel;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,17 @@ public class Swordfish : MonoBehaviour
     {
         facingDirection = Movement.facingDirection;
         dash();
+        attack();
+    }
+
+    void attack(){
+        if(Input.GetKeyDown(KeyCode.Space)){
+            int rotation = -90 * facingDirection;
+            var obj = Instantiate(swordAttack,transform.position,Quaternion.Euler(0,0,rotation));
+            var rb = obj.AddComponent<Rigidbody2D>();
+            rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.velocity = new Vector2(1 * facingDirection,0) * attackVel;
+        }
     }
 
     void dash(){
