@@ -8,6 +8,7 @@ public class NewBehaviourScript : MonoBehaviour
     public static float damage = 1.0f;
 
     public testEnemy enemy;
+    public GameObject obj;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +25,10 @@ public class NewBehaviourScript : MonoBehaviour
             enemy = other.GetComponent<testEnemy>();
             enemy.Health -= damage;
             Debug.Log("hit");
+
+            Destroy(obj);
+        }else{
+            Destroy(obj ,2.0f);
         }
     }
 }

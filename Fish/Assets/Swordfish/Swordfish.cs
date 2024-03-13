@@ -12,6 +12,10 @@ public class Swordfish : MonoBehaviour
     private int facingDirection;
     public GameObject swordAttack;
     public int attackVel;
+    private float cooldown;
+    [SerializeField]
+    private float cooldownOrg;
+    private bool cooldownOver = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,15 +28,25 @@ public class Swordfish : MonoBehaviour
         facingDirection = Movement.facingDirection;
         dash();
         attack();
+        if(!cooldownOver)
+        {
+        cooldown -= Time.deltaTime;
+            if(cooldown <= 0)
+            {
+                cooldownOver = true;
+            }
+        }
     }
 
     void attack(){
-        if(Input.GetKeyDown(KeyCode.Space)){
+        if(Input.GetKeyDown(KeyCode.Space) && cooldownOver){
             int rotation = -90 * facingDirection;
             var obj = Instantiate(swordAttack,transform.position,Quaternion.Euler(0,0,rotation));
             var rb = obj.AddComponent<Rigidbody2D>();
             rb.bodyType = RigidbodyType2D.Kinematic;
             rb.velocity = new Vector2(1 * facingDirection,0) * attackVel;
+            cooldown = cooldownOrg;
+            cooldownOver = false;
         }
     }
 

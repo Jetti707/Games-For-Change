@@ -14,6 +14,9 @@ public class PufferFish : MonoBehaviour
     public float speed = 2.0f;
 
     public GameObject Circle;
+    public GameObject Bomb;
+
+    private int facingDirection = Movement.facingDirection;
 
     public float radius = 5.0f;
 
@@ -33,13 +36,23 @@ public class PufferFish : MonoBehaviour
     {
      if(Input.GetKeyDown(KeyCode.F) && attackCooldown <= 0)
      {
-       attack();
+       explode();
      }
     if(attackCooldown > 0)
     {
       attackCooldown -= Time.deltaTime;
     }
 
+    }
+
+    void explode()
+    {
+
+    var obj = Instantiate(Bomb, transform.position, Quaternion.identity);
+    var rb = obj.AddComponent<Rigidbody2D>();
+
+    rb.bodyType = RigidbodyType2D.Kinematic;
+    rb.velocity = new Vector2(1,0) * facingDirection;
     }
 
     

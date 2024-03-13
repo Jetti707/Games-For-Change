@@ -6,6 +6,7 @@ public class testEnemy : MonoBehaviour
 {   
     
     public float Health = 100;
+    public Vector3 pos;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,13 +17,7 @@ public class testEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    private void onCollisionEnter(Collision other){
-        if(other.gameObject.tag.Equals("player")){
-            Debug.Log("hit");
-        }
+        pos = transform.position;
     }
 
 }
