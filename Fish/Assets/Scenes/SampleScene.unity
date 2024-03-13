@@ -304,7 +304,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7573629866540185745, guid: 0586b973311e6634b8192860e353ab8d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7573629866540185745, guid: 0586b973311e6634b8192860e353ab8d, type: 3}
       propertyPath: m_TagString
@@ -413,6 +413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 100
+  pos: {x: 0, y: 0, z: 0}
 --- !u!212 &703756870
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -507,11 +508,6 @@ MonoBehaviour:
   swordAttack: {fileID: 2372540349133620841, guid: 2ab5e097373a0574ab26620d2f8b9532, type: 3}
   attackVel: 20
   cooldownOrg: 0.5
---- !u!4 &725184768 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7053765162022439064, guid: 0586b973311e6634b8192860e353ab8d, type: 3}
-  m_PrefabInstance: {fileID: 1951990247}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1355247441
 GameObject:
   m_ObjectHideFlags: 3
@@ -619,9 +615,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   Circle: {fileID: 131601424477575172, guid: d98d3faff7777c5468dcb8e2aaeae4fc, type: 3}
+  Bomb: {fileID: 7993117758390457355, guid: 18fa0e1bc55ef3e4e824cbab85184b10, type: 3}
   radius: 5
   numOfObjects: 10
-  attackCooldown: 0
+  attackCooldown: 0.5
+--- !u!4 &1426478664 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7053765162022439064, guid: 0586b973311e6634b8192860e353ab8d, type: 3}
+  m_PrefabInstance: {fileID: 583016250}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1791076646
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,7 +660,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 725184768}
+  m_Follow: {fileID: 1426478664}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 9.064196
@@ -756,7 +758,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7573629866540185745, guid: 0586b973311e6634b8192860e353ab8d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
