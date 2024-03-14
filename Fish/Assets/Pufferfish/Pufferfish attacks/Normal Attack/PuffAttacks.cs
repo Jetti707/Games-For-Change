@@ -9,10 +9,10 @@ public class PuffAttacks : MonoBehaviour
 
     public testEnemy enemy;
 
+
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -23,11 +23,12 @@ public class PuffAttacks : MonoBehaviour
 
      void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Enemy")
-        {   
-            enemy = other.GetComponent<testEnemy>();
-            Debug.Log("Attack Hit");
-            enemy.Health -= damage;
-        }
+        // if(other.tag == "Enemy")
+        // {   
+        //     Debug.Log("hit");
+        //     enemy = other.GetComponent<testEnemy>();
+        //     enemy.Health -= damage;
+        //     Destroy(this);
+        // }
     }
 }

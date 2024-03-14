@@ -6,32 +6,33 @@ public class BombAttack : MonoBehaviour
 {
 
     public int radius;
-    public List<Collider2D> enemyColliders;
     public LayerMask enemyLayer;
+    public Collider2D[] cols;
+    private Rigidbody2D rb;
+    public float timer;
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-    //    Physics2D.OverlapCircle(transform.position, radius,enemyLayer,enemyColliders);
+       Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius,enemyLayer);
+       cols = colliders;
+       timer -= Time.deltaTime;
+       if(timer <= 0){
+        startExplosion();
+       }
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
-
-        Debug.Log("hit");
         if(other.gameObject.tag == "Enemy")
         {
-            Debug.Log("hit2");
-            startExplosion();
-
-            foreach(var hitColliders in enemyColliders){
-                Debug.Log(enemyColliders);
-            }
+            rb.velocity = new Vector2(0,0);
+            Invoke("startExplosion",3);
         }
     }
 
@@ -42,6 +43,15 @@ public class BombAttack : MonoBehaviour
 
     void startExplosion()
     {
-
+        Debug.Log("hit");
+        if(cols.Length > 0){
+            foreach(Collider2D col in cols){
+            var script = col.gameObject.GetComponent<testEnemy>();
+            script.Health -= 10;
+        }
+        }else{
+            Destroy(this,5.0f);
+        }
+        
     }
 }
