@@ -23,12 +23,13 @@ public class PuffAttacks : MonoBehaviour
 
      void OnTriggerEnter2D(Collider2D other)
     {
-        // if(other.tag == "Enemy")
-        // {   
-        //     Debug.Log("hit");
-        //     enemy = other.GetComponent<testEnemy>();
-        //     enemy.Health -= damage;
-        //     Destroy(this);
-        // }
+        if(other.tag == "Enemy")
+        {   
+            Debug.Log("hit");
+            enemy = other.GetComponent<testEnemy>();
+            enemy.Health -= damage;
+
+            Destroy(this.gameObject);
+        }
     }
 }

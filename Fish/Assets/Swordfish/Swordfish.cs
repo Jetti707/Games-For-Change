@@ -12,10 +12,16 @@ public class Swordfish : MonoBehaviour
     private int facingDirection;
     public GameObject swordAttack;
     public int attackVel;
+    //Attack cooldowns
     private float cooldown;
+    private bool cooldownOver = true;
     [SerializeField]
     private float cooldownOrg;
-    private bool cooldownOver = true;
+    //Dash Cooldowns
+    [SerializeField]
+    private float dashCoolOrg;
+    private bool dashCoolOver;
+    private float dashCool;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,8 +32,18 @@ public class Swordfish : MonoBehaviour
     void Update()
     {
         facingDirection = Movement.facingDirection;
-        dash();
+        if(Input.GetKeyDown(KeyCode.Space)){
+        dash();   
+        }
+        if(Input.GetKeyDown(KeyCode.F)){
         attack();
+        }
+        if(!dashCoolOver){
+            dashCool -= Time.deltaTime;
+            if(dashCool <= 0){
+                dashCoolOver = true;
+            }
+        }
         if(!cooldownOver)
         {
         cooldown -= Time.deltaTime;
@@ -39,7 +55,7 @@ public class Swordfish : MonoBehaviour
     }
 
     void attack(){
-        if(Input.GetKeyDown(KeyCode.Space) && cooldownOver){
+        if(Input.GetKeyDown(KeyCode.F) && cooldownOver){
             int rotation = -90 * facingDirection;
             var obj = Instantiate(swordAttack,transform.position,Quaternion.Euler(0,0,rotation));
             var rb = obj.AddComponent<Rigidbody2D>();
@@ -51,31 +67,22 @@ public class Swordfish : MonoBehaviour
     }
 
     void dash(){
-        RaycastHit2D hit = Physics2D.Raycast(transform.position,new Vector2(1,0) * facingDirection,5,objects);
         RaycastHit2D enemyBlock = Physics2D.Raycast(transform.position,new Vector2(1,0) * facingDirection,5,Enemies);   
-        if(hit){
-            Debug.DrawRay(transform.position,new Vector2(1,0) * facingDirection * 5,Color.green);
-        }else if(enemyBlock){
-            Debug.DrawRay(transform.position,new Vector2(1,0) * facingDirection *5 , Color.red);
-            if(Input.GetKeyDown(KeyCode.F)){
-            Debug.Log("enemy");
+       
+        if(enemyBlock){
             Vector3 curEnemPos = enemyBlock.collider.transform.position;
             transform.Translate(new Vector3(curEnemPos.x - transform.position.x * facingDirection - 0.5f,0,0));
-            }
+            dashCoolOver = false;
+            dashCool = dashCoolOrg;
         }else{
-         if(Input.GetKeyDown(KeyCode.F)){
-            Debug.Log("normal");
             transform.Translate(new Vector3(1,0,0) * dashLevel);
-         }
         }
     }
 
 
    void OnCollisionEnter2D(Collision2D other){   
-    Debug.Log("hit1");
     if(other.gameObject.tag == "Enemy")
     {
-        Debug.Log("hit");
         other.gameObject.GetComponent<testEnemy>().Health-= 1;
     }
   }

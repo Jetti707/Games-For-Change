@@ -24,6 +24,7 @@ public class BombAttack : MonoBehaviour
        timer -= Time.deltaTime;
        if(timer <= 0){
         startExplosion();
+        Destroy(this.gameObject,5.0f);
        }
     }
 
@@ -43,14 +44,11 @@ public class BombAttack : MonoBehaviour
 
     void startExplosion()
     {
-        Debug.Log("hit");
         if(cols.Length > 0){
             foreach(Collider2D col in cols){
             var script = col.gameObject.GetComponent<testEnemy>();
             script.Health -= 10;
         }
-        }else{
-            Destroy(this,5.0f);
         }
         
     }

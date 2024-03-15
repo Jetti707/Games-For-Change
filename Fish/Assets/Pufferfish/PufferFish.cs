@@ -25,6 +25,10 @@ public class PufferFish : MonoBehaviour
     [SerializeField]
     private float attackCooldown = 0.5f;
 
+    //Sprite vars
+    public Sprite norm;
+    public Sprite inflated;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,16 +58,19 @@ public class PufferFish : MonoBehaviour
 
     rb.bodyType = RigidbodyType2D.Kinematic;
     rb.velocity = new Vector2(1,0) * facingDirection;
-    // if(!hit){
-    // Destroy(this,5.0f);
-    // }
     }
 
     
     void attack()
     {
 
+        this.gameObject.GetComponent<SpriteRenderer>().sprite = inflated;
+
+        Invoke("changeBackToNorm",0.5f);
+
         float angleStep = 360.0f / numOfObjects;
+
+          float rotationStep = -120;
 
             float nextAngle = 2 * Mathf.PI / numOfObjects;
 
@@ -76,14 +83,20 @@ public class PufferFish : MonoBehaviour
                 float x = Mathf.Cos(angle) * radius;
                 float y = Mathf.Sin(angle) * radius;
 
-                var obj = Instantiate(Circle, transform.position, Quaternion.identity);
+                var obj = Instantiate(Circle, transform.position, Quaternion.Euler(0,0,rotationStep + angleStep));
+                rotationStep += angleStep;
                 var rb = obj.AddComponent<Rigidbody2D>();
                 rb.bodyType = RigidbodyType2D.Kinematic;
                 rb.velocity = new Vector2(x,y) * speed;
+                Debug.Log("Obj " + i + " " + (rotationStep + angleStep));
                 angle += nextAngle;
 
                 Destroy(obj,2.0f);
             }
+    }
+
+    void changeBackToNorm(){
+      this.gameObject.GetComponent<SpriteRenderer>().sprite = norm;
     }
 
     

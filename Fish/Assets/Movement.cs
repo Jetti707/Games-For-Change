@@ -6,19 +6,16 @@ using UnityEngine.InputSystem;
 public class Movement : MonoBehaviour
 {
 
-    [SerializeField]
-    private GameObject active;
-
     Rigidbody2D rb;
     [SerializeField]
     private float movementSpeed;
-    [SerializeField]
-    private LayerMask collisions;
 
     private float horizontal;
     private float vertical;
 
     public static int facingDirection = 1;
+
+    public Vector2 pos;
 
 
 
@@ -28,6 +25,7 @@ public class Movement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        pos = transform.position;
     }
 
     //Update is called once per frame
@@ -55,16 +53,7 @@ public class Movement : MonoBehaviour
         }
 
     }
-    void OnCollisionEnter(Collision other){   
-    Debug.Log("hit1");
-    if(other.gameObject.tag == "Ground")
-    {
-        Debug.Log("hit");
-        other.gameObject.GetComponent<testEnemy>().Health-= 1;
-    }
-  }
-
-  
+    
     void Flip()
     {
         facingDirection *= -1;
