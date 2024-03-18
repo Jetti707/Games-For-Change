@@ -43,6 +43,10 @@ public class PufferFish : MonoBehaviour
      {
        attack();
      }
+     if(Input.GetKeyDown(KeyCode.Space) && attackCooldown <= 0 )
+     {
+      explode();
+     }
     if(attackCooldown > 0)
     {
       attackCooldown -= Time.deltaTime;

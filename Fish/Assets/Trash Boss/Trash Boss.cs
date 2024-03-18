@@ -6,6 +6,8 @@ public class TrashBoss : MonoBehaviour
 {
 
     private Movement player;
+    [SerializeField]
+    private GameObject trash;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +21,12 @@ public class TrashBoss : MonoBehaviour
         Invoke("jumpAttack",2.0f);
     }
 
-    void jumpAttack(){
-        // transform.translate(new Vector2(Movement.pos.x,Movement.pos.y));
+    // void jumpAttack(){
+    //    transform.translate(new Vector2(Movement.pos.x,Movement.pos.y));
+    // }
+
+    void throwTrash()
+    {
+        var obj = Instantiate(trash, transform.position, Quaternion.identity);
     }
 }
