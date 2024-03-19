@@ -15,7 +15,7 @@ public class Movement : MonoBehaviour
 
     public static int facingDirection = 1;
 
-    public Vector2 pos;
+    public static Vector2 pos;
 
 
 
