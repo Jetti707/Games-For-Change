@@ -1,4 +1,4 @@
-    using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,6 +12,7 @@ public class Swordfish : MonoBehaviour
     private int facingDirection;
     public GameObject swordAttack;
     public int attackVel;
+    public float normalDashCooldown;
     //Attack cooldowns
     private float cooldown;
     private bool cooldownOver = true;
@@ -33,12 +34,12 @@ public class Swordfish : MonoBehaviour
     {
         facingDirection = Movement.facingDirection;
        
-       if(Input.GetKeyDown(KeyCode.Space))
+       if(Input.GetKeyDown(KeyCode.Space) && dashCoolOver)
        {
         dash();   
        }
         
-        if(Input.GetKeyDown(KeyCode.F)){
+        if(Input.GetKeyDown(KeyCode.F) && cooldownOver){
         attack();
         }
         if(!dashCoolOver){
@@ -79,6 +80,8 @@ public class Swordfish : MonoBehaviour
             
         }else{
             transform.Translate(new Vector3(1,0,0) * dashLevel);
+            dashCoolOver = false;
+            dashCool = normalDashCooldown;
         }
     }
 
