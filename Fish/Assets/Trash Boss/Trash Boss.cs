@@ -6,13 +6,10 @@ public class TrashBoss : MonoBehaviour
 {
 
     private Movement player;
-<<<<<<< Updated upstream
-=======
     [SerializeField]
     private int amountToSpawn;
     [SerializeField]
     private GameObject trash;
->>>>>>> Stashed changes
 
     private bool thrown;
 
@@ -28,13 +25,6 @@ public class TrashBoss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-<<<<<<< Updated upstream
-        Invoke("jumpAttack",2.0f);
-    }
-
-    void jumpAttack(){
-        // transform.translate(new Vector2(Movement.pos.x,Movement.pos.y));
-=======
         if(!thrown)
         {
         Debug.Log("throwing");
@@ -57,6 +47,5 @@ public class TrashBoss : MonoBehaviour
         rb.velocity = new Vector2(playerPos.x, playerPos.y);
         }
         thrown = true;
->>>>>>> Stashed changes
     }
 }
