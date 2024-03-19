@@ -7,7 +7,7 @@ public class NewBehaviourScript : MonoBehaviour
 
     public static float damage = 1.0f;
 
-    public testEnemy enemy;
+    public Health enemy;
     public GameObject obj;
     // Start is called before the first frame update
     void Start()
@@ -21,13 +21,13 @@ public class NewBehaviourScript : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other){
-        if(other.tag == "Enemy"){
-            enemy = other.GetComponent<testEnemy>();
-            enemy.Health -= damage;
-            Debug.Log("hit");
-
-            Destroy(obj);
-        }else{
+        if(other.tag == "Enemy")
+        {
+            enemy = other.GetComponent<Health>();
+            enemy.curHealth -= damage;
+            Destroy(this.gameObject);
+        }else
+        {
             Destroy(obj ,2.0f);
         }
     }

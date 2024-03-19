@@ -1,4 +1,4 @@
-using System.Collections;
+    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -32,9 +32,12 @@ public class Swordfish : MonoBehaviour
     void Update()
     {
         facingDirection = Movement.facingDirection;
-        if(Input.GetKeyDown(KeyCode.Space)){
+       
+       if(Input.GetKeyDown(KeyCode.Space))
+       {
         dash();   
-        }
+       }
+        
         if(Input.GetKeyDown(KeyCode.F)){
         attack();
         }
@@ -65,13 +68,15 @@ public class Swordfish : MonoBehaviour
     }
 
     void dash(){
-        RaycastHit2D enemyBlock = Physics2D.Raycast(transform.position,new Vector2(1,0) * facingDirection,5,Enemies);   
-       
+        RaycastHit2D enemyBlock = Physics2D.Raycast(transform.position,new Vector2(1,0) * facingDirection,5.0f,Enemies);   
+
         if(enemyBlock){
+            Debug.DrawRay(transform.position,new Vector3(1,0,0) * facingDirection * 5.0f,Color.green);   
             Vector3 curEnemPos = enemyBlock.collider.transform.position;
-            transform.Translate(new Vector3(curEnemPos.x - transform.position.x * facingDirection - 0.5f,0,0));
+            transform.Translate(new Vector3((transform.position.x - enemyBlock.point.x) * -facingDirection,0,0));
             dashCoolOver = false;
             dashCool = dashCoolOrg;
+            
         }else{
             transform.Translate(new Vector3(1,0,0) * dashLevel);
         }
@@ -81,7 +86,8 @@ public class Swordfish : MonoBehaviour
    void OnCollisionEnter2D(Collision2D other){   
     if(other.gameObject.tag == "Enemy")
     {
-        other.gameObject.GetComponent<testEnemy>().Health-= 1;
+        
+        other.gameObject.GetComponent<Health>().curHealth-= 1;
     }
   }
 }

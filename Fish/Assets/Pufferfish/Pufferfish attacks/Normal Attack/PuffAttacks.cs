@@ -7,7 +7,7 @@ public class PuffAttacks : MonoBehaviour
 
     public static float damage = 1.0f;
 
-    public testEnemy enemy;
+    public Health enemy;
 
 
     // Start is called before the first frame update
@@ -25,10 +25,8 @@ public class PuffAttacks : MonoBehaviour
     {
         if(other.tag == "Enemy")
         {   
-            Debug.Log("hit");
-            enemy = other.GetComponent<testEnemy>();
-            enemy.Health -= damage;
-
+            enemy = other.GetComponent<Health>();
+            enemy.curHealth -= damage;
             Destroy(this.gameObject);
         }
     }

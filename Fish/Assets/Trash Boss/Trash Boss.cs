@@ -18,7 +18,7 @@ public class TrashBoss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Invoke("jumpAttack",2.0f);
+        
     }
 
     // void jumpAttack(){
