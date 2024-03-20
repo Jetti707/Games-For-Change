@@ -83,7 +83,7 @@ public class Swordfish : MonoBehaviour
    void OnCollisionEnter2D(Collision2D other){   
     if(other.gameObject.tag == "Enemy")
     {
-        other.gameObject.GetComponent<testEnemy>().Health-= 1;
+        other.gameObject.GetComponent<Health>().curHealth-= 1;
     }
   }
 }

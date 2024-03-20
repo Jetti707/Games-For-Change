@@ -43,6 +43,12 @@ public class PufferFish : MonoBehaviour
      {
        attack();
      }
+
+      if(Input.GetKeyDown(KeyCode.Space) && attackCooldown <= 0)
+      {
+        explode();
+      }
+
     if(attackCooldown > 0)
     {
       attackCooldown -= Time.deltaTime;
@@ -53,11 +59,13 @@ public class PufferFish : MonoBehaviour
     void explode()
     {
 
+    attackCooldown = 1.0f;
+
     var obj = Instantiate(Bomb, transform.position, Quaternion.identity);
     var rb = obj.AddComponent<Rigidbody2D>();
 
     rb.bodyType = RigidbodyType2D.Kinematic;
-    rb.velocity = new Vector2(1,0) * facingDirection;
+    rb.velocity = new Vector2(1,0) * facingDirection * 2;
     }
 
     
@@ -88,7 +96,6 @@ public class PufferFish : MonoBehaviour
                 var rb = obj.AddComponent<Rigidbody2D>();
                 rb.bodyType = RigidbodyType2D.Kinematic;
                 rb.velocity = new Vector2(x,y) * speed;
-                Debug.Log("Obj " + i + " " + (rotationStep + angleStep));
                 angle += nextAngle;
 
                 Destroy(obj,2.0f);

@@ -27,7 +27,6 @@ public class TrashBoss : MonoBehaviour
     {
         if(!thrown)
         {
-        Debug.Log("throwing");
         throwTrash();
 
         }
@@ -41,10 +40,9 @@ public class TrashBoss : MonoBehaviour
     {
         for(int i = 0; i < amountToSpawn ; i ++)
         {
-        Debug.Log("i");
         var obj = Instantiate(trash, transform.position, Quaternion.identity);
         var rb = obj.AddComponent<Rigidbody2D>();
-        rb.velocity = new Vector2(playerPos.x, playerPos.y);
+        rb.isKinematic = true;
         }
         thrown = true;
     }

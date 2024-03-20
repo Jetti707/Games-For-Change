@@ -19,12 +19,11 @@ public class BombAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius,enemyLayer);
-       cols = colliders;
+       cols = Physics2D.OverlapCircleAll(transform.position, radius, enemyLayer);
        timer -= Time.deltaTime;
-       if(timer <= 0){
+       if(timer <= 0 && cols.Length == 0){
         startExplosion();
-        Destroy(this.gameObject,5.0f);
+        Destroy(this.gameObject,2.0f);
        }
     }
 
@@ -33,8 +32,10 @@ public class BombAttack : MonoBehaviour
         if(other.gameObject.tag == "Enemy")
         {
             rb.velocity = new Vector2(0,0);
-            Invoke("startExplosion",3);
+            startExplosion();
+            Destroy(this.gameObject);
         }
+       
     }
 
     private void OnDrawGizmos()
@@ -46,8 +47,8 @@ public class BombAttack : MonoBehaviour
     {
         if(cols.Length > 0){
             foreach(Collider2D col in cols){
-            var script = col.gameObject.GetComponent<testEnemy>();
-            script.Health -= 10;
+            var script = col.gameObject.GetComponent<Health>();
+            script.curHealth -= 10;
         }
         }
         
