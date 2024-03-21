@@ -33,12 +33,9 @@ public class Swordfish : MonoBehaviour
     void Update()
     {
         facingDirection = Movement.facingDirection;
-       
-       if(Input.GetKeyDown(KeyCode.Space) && dashCoolOver)
-       {
+        if(Input.GetKeyDown(KeyCode.Space) && dashCoolOver){
         dash();   
-       }
-        
+        }
         if(Input.GetKeyDown(KeyCode.F) && cooldownOver){
         attack();
         }
@@ -66,6 +63,7 @@ public class Swordfish : MonoBehaviour
             rb.velocity = new Vector2(1 * facingDirection,0) * attackVel;
             cooldown = cooldownOrg;
             cooldownOver = false;
+        
     }
 
     void dash(){
@@ -89,7 +87,6 @@ public class Swordfish : MonoBehaviour
    void OnCollisionEnter2D(Collision2D other){   
     if(other.gameObject.tag == "Enemy")
     {
-        
         other.gameObject.GetComponent<Health>().curHealth-= 1;
     }
   }
