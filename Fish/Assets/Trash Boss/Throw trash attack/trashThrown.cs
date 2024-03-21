@@ -21,4 +21,13 @@ public class trashThrown : MonoBehaviour
     {
         
     }
+
+    void onTriggerEnter2D(Collision2D other)
+    {
+        if(other.gameObject.tag == "Player")
+        {
+            Health playerHealth = GetComponent<Health>();
+            playerHealth.curHealth -= 10;
+        }
+    }
 }

@@ -32,10 +32,10 @@ public class Swordfish : MonoBehaviour
     void Update()
     {
         facingDirection = Movement.facingDirection;
-        if(Input.GetKeyDown(KeyCode.Space)){
+        if(Input.GetKeyDown(KeyCode.Space) && dashCoolOver){
         dash();   
         }
-        if(Input.GetKeyDown(KeyCode.F)){
+        if(Input.GetKeyDown(KeyCode.F) && cooldownOver){
         attack();
         }
         if(!dashCoolOver){
@@ -55,7 +55,6 @@ public class Swordfish : MonoBehaviour
     }
 
     void attack(){
-        if(Input.GetKeyDown(KeyCode.F) && cooldownOver){
             int rotation = -90 * facingDirection;
             var obj = Instantiate(swordAttack,transform.position,Quaternion.Euler(0,0,rotation));
             var rb = obj.AddComponent<Rigidbody2D>();
@@ -63,7 +62,7 @@ public class Swordfish : MonoBehaviour
             rb.velocity = new Vector2(1 * facingDirection,0) * attackVel;
             cooldown = cooldownOrg;
             cooldownOver = false;
-        }
+        
     }
 
     void dash(){

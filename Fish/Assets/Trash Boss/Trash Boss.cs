@@ -36,7 +36,7 @@ public class TrashBoss : MonoBehaviour
     //    transform.translate(new Vector2(Movement.pos.x,Movement.pos.y));
     // }
 
-    void throwTrash()
+    public void throwTrash()
     {
         for(int i = 0; i < amountToSpawn ; i ++)
         {
