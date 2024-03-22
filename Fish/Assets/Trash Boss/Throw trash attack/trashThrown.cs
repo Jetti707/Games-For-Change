@@ -5,15 +5,11 @@ using UnityEngine;
 public class trashThrown : MonoBehaviour
 {
     private GameObject player;
-    private Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindWithTag("Player"); 
-        transform.position = new Vector2(transform.position.x - Random.Range(-10.0f, 10.0f) , transform.position.y - Random.Range(-10.0f, 10.0f));
-        rb = GetComponent<Rigidbody2D>();
-        rb.velocity = player.transform.position - transform.position;   
-        Destroy(this.gameObject,2.0f);
+        player = GameObject.FindWithTag("Player");
+        Destroy(this.gameObject,10.0f);
     }
 
     // Update is called once per frame
@@ -22,12 +18,13 @@ public class trashThrown : MonoBehaviour
         
     }
 
-    void onTriggerEnter2D(Collision2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if(other.gameObject.tag == "Player")
         {
-            Health playerHealth = GetComponent<Health>();
+            Health playerHealth = player.GetComponent<Health>();
             playerHealth.curHealth -= 10;
+            Destroy(this.gameObject);
         }
     }
 }
