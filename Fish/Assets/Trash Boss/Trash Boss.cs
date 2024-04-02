@@ -9,8 +9,13 @@ public class TrashBoss : MonoBehaviour
     public int numOfObjects;
     public int radius;
     public GameObject Circle;
-    // [SerializeField]
-    // private int amountToSpawn;
+
+    [SerializeField]
+    private float attack1Timer;
+    private bool attack1TimerCount;
+
+    [SerializeField]
+    private float attack2Timer;
 
     private bool thrown;
 
@@ -21,33 +26,44 @@ public class TrashBoss : MonoBehaviour
     {
         thrown = false; 
         playerPos = Movement.pos;
+        attack1Timer = 10.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!thrown)
+        playerPos = Movement.pos;
+        if(!thrown && !attack1TimerCount)
         {
         throwTrash();
+        attack1TimerCount  = true;
+        }
 
+        if(attack1TimerCount){
+            attack1Timer -= Time.deltaTime;
+            if(attack1Timer <= 0){
+                attack1TimerCount = false;
+                attack1Timer = 10.0f;
+            }
+            thrown = false;
         }
     }
 
-    // void jumpAttack(){
-    //    transform.translate(new Vector2(Movement.pos.x,Movement.pos.y));
-    // }
+    public void jumpAttack(){
+       transform.position = playerPos;
+       Collider2D [] cols = Physics2D.OverlapCircleAll(transform.position, radius);
+       if(cols.Length > 0 )
+       {
+        var script = cols[0].GetComponent<Health>();
+        script.curHealth -=10;
+        Debug.Log("Hit player");
+       }
+    }
 
     public void throwTrash()
     {
-        // for(int i = 0; i < amountToSpawn ; i ++)
-        // {
-        // var obj = Instantiate(trash, new Vector3(transform.position.x  + Random.Range(-5.0f, 5.0f) ,transform.position.y + Random.Range(-5.0f, 5.0f) ,0), Quaternion.identity);
-        // var rb = obj.AddComponent<Rigidbody2D>();
-        // rb.isKinematic = true;
-        // rb.velocity = new Vector2(-1,0) * 10;
-        // }
-        // thrown = true;
          float angleStep = 360.0f / numOfObjects;
+        
 
           float rotationStep = -120;
 
@@ -65,8 +81,6 @@ public class TrashBoss : MonoBehaviour
                 rb.bodyType = RigidbodyType2D.Kinematic;
                 rb.velocity = new Vector2(x,y) * 10 ;
                 angle += nextAngle;
-
-                Destroy(obj,1.0f);
             }
             
                 thrown = true;

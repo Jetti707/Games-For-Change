@@ -602,7 +602,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7573629866540185745, guid: 0586b973311e6634b8192860e353ab8d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7573629866540185745, guid: 0586b973311e6634b8192860e353ab8d, type: 3}
       propertyPath: m_TagString
@@ -650,7 +650,6 @@ MonoBehaviour:
     m_Bits: 256
   swordAttack: {fileID: 2372540349133620841, guid: 2ab5e097373a0574ab26620d2f8b9532, type: 3}
   attackVel: 20
-  normalDashCooldown: 0
   cooldownOrg: 0.5
   dashCoolOrg: 0.5
 --- !u!1 &1172815083
@@ -699,9 +698,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 115748d553884894b8921c7601192035, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numOfObjects: 0
-  radius: 0
-  Circle: {fileID: 0}
+  numOfObjects: 10
+  radius: 5
+  Circle: {fileID: 5728294398213581337, guid: 89f9b3871e4e4d64aa090aed0429dc20, type: 3}
+  attack1Timer: 0
 --- !u!212 &1172815086
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1107,11 +1107,6 @@ MonoBehaviour:
   attackCooldown: 0.5
   norm: {fileID: 21300000, guid: e97e0a74f59e1c947a058ec4d314c81b, type: 3}
   inflated: {fileID: 21300000, guid: 1c76f8169ec96534b9d4a8c51c8c215f, type: 3}
---- !u!4 &1426478664 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7053765162022439064, guid: 0586b973311e6634b8192860e353ab8d, type: 3}
-  m_PrefabInstance: {fileID: 583016250}
-  m_PrefabAsset: {fileID: 0}
 --- !u!60 &1426478669
 PolygonCollider2D:
   m_ObjectHideFlags: 0
