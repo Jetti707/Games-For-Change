@@ -49,15 +49,28 @@ public class TrashBoss : MonoBehaviour
         }
     }
 
-    public void jumpAttack(){
+    void onDrawGizmos()
+    {
+        // Gizmos.DrawCircle(transform.position,radius);
+    }
+
+    public void doJumpAttack()
+    {
        transform.position = playerPos;
+        Invoke("jumpAttack",5.0f);
+    }
+
+    public void jumpAttack(){    
+
        Collider2D [] cols = Physics2D.OverlapCircleAll(transform.position, radius);
        if(cols.Length > 0 )
        {
         var script = cols[0].GetComponent<Health>();
         script.curHealth -=10;
+        Debug.Log(cols.Length);
         Debug.Log("Hit player");
        }
+
     }
 
     public void throwTrash()

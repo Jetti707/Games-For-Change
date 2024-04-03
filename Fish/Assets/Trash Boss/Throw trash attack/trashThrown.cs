@@ -25,6 +25,8 @@ public class trashThrown : MonoBehaviour
             Health playerHealth = player.GetComponent<Health>();
             playerHealth.curHealth -= 10;
             Destroy(this.gameObject);
+        }else{
+            Destroy(this.gameObject,5.0f);
         }
     }
 }
