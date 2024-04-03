@@ -24,6 +24,7 @@ public class PufferFish : MonoBehaviour
 
     [SerializeField]
     private float attackCooldown = 0.5f;
+    public float bombCooldown;
 
     //Sprite vars
     public Sprite norm;
@@ -44,7 +45,7 @@ public class PufferFish : MonoBehaviour
        attack();
      }
 
-      if(Input.GetKeyDown(KeyCode.Space) && attackCooldown <= 0)
+      if(Input.GetKeyDown(KeyCode.Space) && bombCooldown <= 0)
       {
         explode();
       }
@@ -54,12 +55,16 @@ public class PufferFish : MonoBehaviour
       attackCooldown -= Time.deltaTime;
     }
 
+    if(bombCooldown > 0)
+    {
+      bombCooldown -= Time.deltaTime;
+    }
     }
 
     void explode()
     {
 
-    attackCooldown = 1.0f;
+    bombCooldown = 1.5f;
 
     var obj = Instantiate(Bomb, transform.position, Quaternion.identity);
     var rb = obj.AddComponent<Rigidbody2D>();
