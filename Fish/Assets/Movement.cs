@@ -25,12 +25,12 @@ public class Movement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        pos = transform.position;
     }
 
     //Update is called once per frame
     void Update()
     {
+       pos = transform.position;
        checkInput();
     }
 
