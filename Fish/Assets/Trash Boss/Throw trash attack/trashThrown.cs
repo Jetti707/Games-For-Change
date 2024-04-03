@@ -27,7 +27,7 @@ public class trashThrown : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             Health playerHealth = GetComponent<Health>();
-            playerHealth.curHealth -= 10;
+            playerHealth.curHealth -= 1;
         }
     }
 }
