@@ -9,7 +9,10 @@ public class TrashBoss : MonoBehaviour
     public int numOfObjects;
     public int radius;
     public GameObject Circle;
-
+    [SerializeField]
+    private LayerMask playerMask;
+    [SerializeField]
+    private Collider2D[] colShow;
     [SerializeField]
     private float attack1Timer;
     private bool attack1TimerCount;
@@ -18,13 +21,21 @@ public class TrashBoss : MonoBehaviour
     private float attack2Timer;
 
     private bool thrown;
+    private bool jumping;
 
     private Vector2 playerPos;
+
+    private CameraFirstBoss camScript;
+
+    private Vector3 camPos;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        thrown = false; 
+        camScript = GameObject.FindWithTag("Camera").GetComponent<CameraFirstBoss>();
+        thrown = false;
+        jumping = false;
         playerPos = Movement.pos;
         attack1Timer = 10.0f;
     }
@@ -33,6 +44,10 @@ public class TrashBoss : MonoBehaviour
     void Update()
     {
         playerPos = Movement.pos;
+        if(!jumping)
+        {
+        move();
+        }
         if(!thrown && !attack1TimerCount)
         {
         throwTrash();
@@ -49,27 +64,28 @@ public class TrashBoss : MonoBehaviour
         }
     }
 
-    void onDrawGizmos()
+    private void OnDrawGizmos()
     {
-        // Gizmos.DrawCircle(transform.position,radius);
+        Gizmos.DrawWireSphere(transform.position, radius);
     }
 
     public void doJumpAttack()
     {
        transform.position = playerPos;
-        Invoke("jumpAttack",5.0f);
+       jumping = true;
+       Invoke("jumpAttack",5.0f);
     }
 
     public void jumpAttack(){    
-
-       Collider2D [] cols = Physics2D.OverlapCircleAll(transform.position, radius);
+       Collider2D [] cols = Physics2D.OverlapCircleAll(transform.position, radius,playerMask);
+       colShow = cols;
        if(cols.Length > 0 )
        {
         var script = cols[0].GetComponent<Health>();
         script.curHealth -=10;
-        Debug.Log(cols.Length);
-        Debug.Log("Hit player");
        }
+       jumping = false;
+       resetBackToPosition();
 
     }
 
@@ -97,5 +113,16 @@ public class TrashBoss : MonoBehaviour
             }
             
                 thrown = true;
+    }
+
+     public void resetBackToPosition()
+    {
+        transform.position = new Vector3(16.88f,-1.26f,0.0f);
+    }
+
+    private void move()
+    {
+        camPos = camScript.currentPos;
+        transform.position = new Vector3(camPos.x +26.07f , 0,0);
     }
 }
