@@ -38,11 +38,6 @@ public class BombAttack : MonoBehaviour
        
     }
 
-    private void OnDrawGizmos()
-        {
-            Gizmos.DrawWireSphere(transform.position, radius);
-        }
-
     void startExplosion()
     {
         if(cols.Length > 0){

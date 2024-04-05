@@ -27,12 +27,6 @@ public class Eel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        chargeAttack();
-    }
-
-    void chargeAttack()
-    {
-
         if(Input.GetKeyDown(KeyCode.F) && cooldownOver)
         {
             attack();
@@ -51,18 +45,35 @@ public class Eel : MonoBehaviour
             howLongHeld += Time.deltaTime;
         }
 
+         if(Input.GetKeyUp(KeyCode.Space))
+        {
+            this.GetComponent<Movement>().enabled = true;
+            howLongHeld = 0;
+        }
+    }
+
+    void FixedUpdate()
+    {
+        chargeAttack();
+    }
+
+    void chargeAttack()
+    {
+
 
         if(howLongHeld > attackThreshold)
             {
-                Physics2D.Raycast(new Vector3(transform.position.x + 10, transform.position.y + 5,0),new Vector2(1,0) * Movement.facingDirection ,5.0f,Enemies);
-                Debug.DrawRay(new Vector3(transform.position.x + 2.0f * Movement.facingDirection, transform.position.y + 0.25f,0),new Vector2(1,0) * Movement.facingDirection * 5.0f,Color.green);
+                this.GetComponent<Movement>().enabled = false;
+                this.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
+                RaycastHit2D hit = Physics2D.Raycast(new Vector3(transform.position.x + 2.0f, transform.position.y + 0.25f,0),new Vector2(1,0) * Movement.facingDirection ,35.0f,Enemies);
+                Debug.DrawRay(new Vector3(transform.position.x + 2.0f * Movement.facingDirection, transform.position.y + 0.25f,0),new Vector2(1,0) * Movement.facingDirection *35.0f,Color.green);
+                if(hit)
+                {
+                 var enemyHealth = hit.transform.gameObject.GetComponent<Health>();
+                 enemyHealth.curHealth -= 1;
+                }
             }
 
-        if(Input.GetKeyUp(KeyCode.Space))
-        {
-            Debug.Log(howLongHeld);
-            howLongHeld = 0;
-        }
     }
 
     void attack(){
@@ -72,5 +83,6 @@ public class Eel : MonoBehaviour
             rb.velocity = new Vector2(1 * Movement.facingDirection,0) * 5;
             cooldown = cooldownOrg;
             cooldownOver = false;
+            Destroy(obj,2.5f);
     }
 }

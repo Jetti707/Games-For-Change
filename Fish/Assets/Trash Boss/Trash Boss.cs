@@ -6,27 +6,28 @@ public class TrashBoss : MonoBehaviour
 {
 
     private Movement player;
+    private Vector2 playerPos;
+
     public int numOfObjects;
     public int radius;
     public GameObject Circle;
     [SerializeField]
     private LayerMask playerMask;
+    
     [SerializeField]
-    private Collider2D[] colShow;
+    private float jumpCool;
     [SerializeField]
-    private float attack1Timer;
-    private bool attack1TimerCount;
-
-    [SerializeField]
-    private float attack2Timer;
-
-    private bool thrown;
+    private float jumpCoolOrg;
+    private bool canJump;
     private bool jumping;
 
-    private Vector2 playerPos;
+    [SerializeField]
+    private float attack1Timer;
+    private bool attack1TimerNotOver;
+    private bool thrown;
+
 
     private CameraFirstBoss camScript;
-
     private Vector3 camPos;
 
 
@@ -37,7 +38,7 @@ public class TrashBoss : MonoBehaviour
         thrown = false;
         jumping = false;
         playerPos = Movement.pos;
-        attack1Timer = 10.0f;
+        attack1Timer = 3.0f;
     }
 
     // Update is called once per frame
@@ -48,26 +49,36 @@ public class TrashBoss : MonoBehaviour
         {
         move();
         }
-        if(!thrown && !attack1TimerCount)
+
+
+        if(!thrown && !attack1TimerNotOver)
         {
         throwTrash();
-        attack1TimerCount  = true;
+        attack1TimerNotOver  = true;
         }
 
-        if(attack1TimerCount){
+        if(attack1TimerNotOver){
             attack1Timer -= Time.deltaTime;
             if(attack1Timer <= 0){
-                attack1TimerCount = false;
-                attack1Timer = 10.0f;
+                attack1TimerNotOver = false;
+                attack1Timer = 3.0f;
             }
             thrown = false;
         }
+
+        if(jumpCool <= 0 && attack1TimerNotOver)
+        {
+            doJumpAttack();
+            jumpCool = jumpCoolOrg;
+            canJump = false;
+        }
+
+        if(!canJump)
+        {
+            jumpCool -= Time.deltaTime;
+        }
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(transform.position, radius);
-    }
 
     public void doJumpAttack()
     {
@@ -78,7 +89,6 @@ public class TrashBoss : MonoBehaviour
 
     public void jumpAttack(){    
        Collider2D [] cols = Physics2D.OverlapCircleAll(transform.position, radius,playerMask);
-       colShow = cols;
        if(cols.Length > 0 )
        {
         var script = cols[0].GetComponent<Health>();
