@@ -25,7 +25,6 @@ public class PuffAttacks : MonoBehaviour
     {
         if(other.tag == "Enemy")
         {   
-            Debug.Log("hit");
             enemy = other.GetComponent<Health>();
             enemy.curHealth -= damage;
             Destroy(this.gameObject);

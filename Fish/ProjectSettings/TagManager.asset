@@ -10,11 +10,12 @@ TagManager:
   - Enemy
   - Pufferfish
   - Camera
+  - outterCol
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - OutterCol
   - Water
   - UI
   - Player

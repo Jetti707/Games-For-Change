@@ -19,7 +19,7 @@ public class TrashBoss : MonoBehaviour
     [SerializeField]
     private float jumpCoolOrg;
     private bool canJump;
-    private bool jumping;
+    public bool jumping;
 
     [SerializeField]
     private float attack1Timer;
@@ -68,6 +68,7 @@ public class TrashBoss : MonoBehaviour
 
         if(jumpCool <= 0 && attack1TimerNotOver)
         {
+            this.transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
             doJumpAttack();
             jumpCool = jumpCoolOrg;
             canJump = false;

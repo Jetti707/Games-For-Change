@@ -66,23 +66,30 @@ public class Swordfish : MonoBehaviour
     }
 
     void dash(){
+        var script = GameObject.FindWithTag("Enemy").GetComponent<TrashBoss>();
+        
         RaycastHit2D enemyBlock = Physics2D.Raycast(transform.position,new Vector2(1,0) * facingDirection,5,Enemies);   
-       
-        if(enemyBlock){
+        
+
+        if(enemyBlock && enemyBlock.distance > 0.5f){
+            Debug.Log("enemy Block");
             Vector3 curEnemPos = enemyBlock.collider.transform.position;
-            transform.Translate(new Vector3(curEnemPos.x - transform.position.x * facingDirection - 0.5f,0,0));
+            transform.Translate(new Vector3((curEnemPos.x - transform.position.x) * facingDirection - 1.0f,0,0));   
             dashCoolOver = false;
             dashCool = dashCoolOrg;
         }else{
             transform.Translate(new Vector3(1,0,0) * dashLevel);
         }
+        
     }
 
 
-   void OnTriggerEnter2D(Collider2D other){   
-    if(other.gameObject.tag == "Enemy")
+   void OnCollisionEnter2D(Collision2D other){  
+    Debug.Log("Hit1");
+    if(other.gameObject.tag == "Enemies")
     {
-        other.gameObject.GetComponent<Health>().curHealth-= 1;
+        Debug.Log("hit");
+        other.transform.parent.gameObject.GetComponent<Health>().curHealth-= 1;
     }
   }
 }
