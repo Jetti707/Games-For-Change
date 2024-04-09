@@ -19,14 +19,22 @@ public class Eel : MonoBehaviour
 
     public float attackThreshold;
 
+    private SpriteRenderer sp;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        sp = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        spriteAnimation();
+
+
         if(Input.GetKeyDown(KeyCode.F) && cooldownOver)
         {
             attack();
@@ -84,5 +92,16 @@ public class Eel : MonoBehaviour
             cooldown = cooldownOrg;
             cooldownOver = false;
             Destroy(obj,2.5f);
+    }
+
+    void spriteAnimation()
+    {
+        Sprite[] spriteSheetSprites = Resources.LoadAll<Sprite>("eel spritesheet");
+
+        Debug.Log(spriteSheetSprites.Length);
+        foreach(Sprite cur in spriteSheetSprites)
+        {
+            sp.sprite = cur;
+        }
     }
 }
