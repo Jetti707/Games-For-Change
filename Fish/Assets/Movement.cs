@@ -36,7 +36,15 @@ public class Movement : MonoBehaviour
 
     void FixedUpdate()
     {
+    rotateOnInput();
     rb.velocity = new Vector2(horizontal * movementSpeed , vertical * movementSpeed);
+    }
+
+    void rotateOnInput()
+    {
+        
+        // transform.Rotate(new Vector3(1.0f,0.0f,0.0f), rotate, Space.Self);
+
     }
 
     void checkInput()

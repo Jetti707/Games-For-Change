@@ -32,8 +32,6 @@ public class Eel : MonoBehaviour
     void Update()
     {
 
-        spriteAnimation();
-
 
         if(Input.GetKeyDown(KeyCode.F) && cooldownOver)
         {
@@ -94,14 +92,7 @@ public class Eel : MonoBehaviour
             Destroy(obj,2.5f);
     }
 
-    void spriteAnimation()
-    {
-        Sprite[] spriteSheetSprites = Resources.LoadAll<Sprite>("eel spritesheet");
-
-        Debug.Log(spriteSheetSprites.Length);
-        foreach(Sprite cur in spriteSheetSprites)
-        {
-            sp.sprite = cur;
-        }
-    }
+   
 }
+
+

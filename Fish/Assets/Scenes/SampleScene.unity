@@ -196,6 +196,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7938501896826218367, guid: 0586b973311e6634b8192860e353ab8d, type: 3}
+      propertyPath: m_Size.x
+      value: 7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7938501896826218367, guid: 0586b973311e6634b8192860e353ab8d, type: 3}
+      propertyPath: m_Size.y
+      value: 7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7938501896826218367, guid: 0586b973311e6634b8192860e353ab8d, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 6067ce44dbb95c445baf6732b677a920, type: 3}
@@ -210,6 +218,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7573629866540185745, guid: 0586b973311e6634b8192860e353ab8d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1853755406}
+    - targetCorrespondingSourceObject: {fileID: 7573629866540185745, guid: 0586b973311e6634b8192860e353ab8d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1853755413}
   m_SourcePrefab: {fileID: 100100000, guid: 0586b973311e6634b8192860e353ab8d, type: 3}
 --- !u!1 &283418414
 GameObject:
@@ -1344,7 +1355,7 @@ PolygonCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 7.5, y: 7.5}
-    newSize: {x: 1.89, y: 1.8}
+    newSize: {x: 7.5, y: 7.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -1435,6 +1446,27 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   attackThreshold: 1.5
+--- !u!95 &1853755413
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853755405}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9963eb1190aaa64469787b1a8fdf5d52, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1951990247
 PrefabInstance:
   m_ObjectHideFlags: 0
