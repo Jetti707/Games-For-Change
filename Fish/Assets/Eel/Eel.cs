@@ -58,6 +58,11 @@ public class Eel : MonoBehaviour
         }
     }
 
+    public float getHowLongHeld()
+    {
+        return howLongHeld;
+    }
+
     void FixedUpdate()
     {
         chargeAttack();
@@ -72,7 +77,7 @@ public class Eel : MonoBehaviour
                 this.GetComponent<Movement>().enabled = false;
                 this.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
                 RaycastHit2D hit = Physics2D.Raycast(new Vector3(transform.position.x + 2.0f, transform.position.y + 0.25f,0),new Vector2(1,0) * Movement.facingDirection ,35.0f,Enemies);
-                Debug.DrawRay(new Vector3(transform.position.x + 2.0f * Movement.facingDirection, transform.position.y + 0.25f,0),new Vector2(1,0) * Movement.facingDirection *35.0f,Color.green);
+                Debug.DrawRay(new Vector3(transform.position.x + 2.0f, transform.position.y + 0.25f,0),new Vector2(1,0) * Movement.facingDirection *35.0f,Color.green);
                 if(hit)
                 {
                  var enemyHealth = hit.transform.gameObject.GetComponent<Health>();

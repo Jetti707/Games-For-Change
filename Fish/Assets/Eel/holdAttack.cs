@@ -4,23 +4,37 @@ using UnityEngine;
 
 public class holdAttack : MonoBehaviour
 {
-    private Eel parentScript;
-    private Vector2 playerPos;
-    public float increaseRate;
-    private int facingDirection;
+    // private float howLongHeld = 0;
+    private GameObject firstParent;
+    private GameObject secondParent;
+    private Eel secondParentScript;
     // Start is called before the first frame update
     void Start()
     {
-        parentScript = transform.parent.gameObject.GetComponent<Eel>();
+        firstParent = transform.parent.gameObject;
+        secondParent = firstParent.transform.parent.gameObject;
+        secondParentScript = secondParent.GetComponent<Eel>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        facingDirection = Movement.facingDirection;
-        playerPos = parentScript.transform.position;
-        transform.localScale += new Vector3(increaseRate * facingDirection,0,0);
-        transform.Translate(new Vector2(transform.position.x / 2 , 0));
-        Debug.Log(transform.position);
+        shoot();
     }
+
+    void shoot()
+    {
+        if(secondParentScript.getHowLongHeld() == 0)
+        {
+            firstParent.transform.localScale -= new Vector3(firstParent.transform.localScale.x,0,0);
+        }
+        if(secondParentScript.getHowLongHeld() > secondParentScript.attackThreshold)
+        {
+            if(firstParent.transform.localScale.x <= 110.0f)
+            {
+            firstParent.transform.localScale += new Vector3(1.0f,0.0f,0.0f);
+            }
+        }
+    }
+
 }
