@@ -440,14 +440,6 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 2837324697001401380, guid: 0586b973311e6634b8192860e353ab8d, type: 3}
-      propertyPath: curHealth
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2837324697001401380, guid: 0586b973311e6634b8192860e353ab8d, type: 3}
-      propertyPath: maxHealth
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 7053765162022439064, guid: 0586b973311e6634b8192860e353ab8d, type: 3}
       propertyPath: m_LocalScale.x
       value: -1
@@ -554,7 +546,7 @@ MonoBehaviour:
     m_Bits: 256
   swordAttack: {fileID: 2372540349133620841, guid: 2ab5e097373a0574ab26620d2f8b9532, type: 3}
   attackVel: 20
-  normalDashCooldown: 0.1
+  normalDashCooldown: 0
   cooldownOrg: 0.5
   dashCoolOrg: 0.5
 --- !u!1 &1172815083
@@ -584,13 +576,14 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 725184762}
+  m_GameObject: {fileID: 1172815083}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ea9955885c3d7249a6d496a7008513e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   curHealth: 10000
+  maxHealth: 0
 --- !u!114 &1172815085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1111,7 +1104,7 @@ MonoBehaviour:
   radius: 5
   numOfObjects: 10
   attackCooldown: 0.5
-  bombCooldown: 1.5
+  bombCooldown: 0
   norm: {fileID: 21300000, guid: e97e0a74f59e1c947a058ec4d314c81b, type: 3}
   inflated: {fileID: 21300000, guid: 1c76f8169ec96534b9d4a8c51c8c215f, type: 3}
 --- !u!60 &1426478669
@@ -1558,14 +1551,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2837324697001401380, guid: 0586b973311e6634b8192860e353ab8d, type: 3}
-      propertyPath: curHealth
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2837324697001401380, guid: 0586b973311e6634b8192860e353ab8d, type: 3}
-      propertyPath: maxHealth
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 7053765162022439064, guid: 0586b973311e6634b8192860e353ab8d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.58
@@ -1620,19 +1605,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7573629866540185745, guid: 0586b973311e6634b8192860e353ab8d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2837324697001401380, guid: 0586b973311e6634b8192860e353ab8d, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7573629866540185745, guid: 0586b973311e6634b8192860e353ab8d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 725184763}
-    - targetCorrespondingSourceObject: {fileID: 7573629866540185745, guid: 0586b973311e6634b8192860e353ab8d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 725184764}
   m_SourcePrefab: {fileID: 100100000, guid: 0586b973311e6634b8192860e353ab8d, type: 3}
 --- !u!1 &1971136970
 GameObject:
@@ -1775,5 +1756,6 @@ SceneRoots:
   - {fileID: 1791076648}
   - {fileID: 583016250}
   - {fileID: 1951990247}
+  - {fileID: 1172815087}
   - {fileID: 283418417}
   - {fileID: 277446352}
