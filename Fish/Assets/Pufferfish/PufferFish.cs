@@ -13,6 +13,8 @@ public class PufferFish : MonoBehaviour
 
     public float speed = 2.0f;
 
+    public float bombSpeed;
+
     public GameObject Circle;
     public GameObject Bomb;
 
@@ -70,7 +72,7 @@ public class PufferFish : MonoBehaviour
     var rb = obj.AddComponent<Rigidbody2D>();
 
     rb.bodyType = RigidbodyType2D.Kinematic;
-    rb.velocity = new Vector2(1,0) * facingDirection * 2;
+    rb.velocity = new Vector2(1,0) * facingDirection * bombSpeed;
     }
 
     

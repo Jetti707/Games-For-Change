@@ -9,14 +9,16 @@ TagManager:
   - FallingGround
   - Enemy
   - Pufferfish
+  - Camera
+  - outterCol
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - OutterCol
   - Water
   - UI
-  - 
+  - Player
   - 
   - Enemies
   - objects

@@ -6,71 +6,124 @@ public class TrashBoss : MonoBehaviour
 {
 
     private Movement player;
+    private Vector2 playerPos;
+
     public int numOfObjects;
     public int radius;
     public GameObject Circle;
+    public GameObject trashWallTrash;
+    [SerializeField]
+    private LayerMask playerMask;
+    
+    [SerializeField]
+    private float jumpCool;
+    [SerializeField]
+    private float jumpCoolOrg;
+    private bool canJump;
+    public bool jumping;
 
     [SerializeField]
     private float attack1Timer;
-    private bool attack1TimerCount;
-
-    [SerializeField]
-    private float attack2Timer;
-
+    private bool attack1TimerNotOver;
     private bool thrown;
 
-    private Vector2 playerPos;
+    [SerializeField]
+    private float wallTimer;
+    private float wallTimerOrg = 5.0f;
+
+
+    private CameraFirstBoss camScript;
+    private Vector3 camPos;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        thrown = false; 
+        camScript = GameObject.FindWithTag("Camera").GetComponent<CameraFirstBoss>();
+        thrown = false;
+        jumping = false;
         playerPos = Movement.pos;
-        attack1Timer = 10.0f;
+        attack1Timer = 3.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
         playerPos = Movement.pos;
-        if(!thrown && !attack1TimerCount)
+        if(!jumping)
         {
-        throwTrash();
-        attack1TimerCount  = true;
+        move();
         }
 
-        if(attack1TimerCount){
+        if(wallTimer <= 0)
+        {
+            trashWall();
+            wallTimer = wallTimerOrg;
+        }
+
+        if(wallTimer > 0)
+        {
+            wallTimer -= Time.deltaTime;
+        }
+
+
+        if(!thrown && !attack1TimerNotOver)
+        {
+        throwTrash();
+        attack1TimerNotOver  = true;
+        }
+
+        if(attack1TimerNotOver){
             attack1Timer -= Time.deltaTime;
             if(attack1Timer <= 0){
-                attack1TimerCount = false;
-                attack1Timer = 10.0f;
+                attack1TimerNotOver = false;
+                attack1Timer = 2.5f;
             }
             thrown = false;
         }
+
+        if(jumpCool <= 0 && attack1TimerNotOver)
+        {
+            this.transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+            doJumpAttack();
+            jumpCool = jumpCoolOrg;
+            canJump = false;
+        }
+
+        if(!canJump)
+        {
+            jumpCool -= Time.deltaTime;
+        }
     }
 
-    void onDrawGizmos()
-    {
-        // Gizmos.DrawCircle(transform.position,radius);
-    }
 
     public void doJumpAttack()
     {
        transform.position = playerPos;
-        Invoke("jumpAttack",5.0f);
+       jumping = true;
+       Invoke("jumpAttack",5.0f);
     }
 
     public void jumpAttack(){    
-
-       Collider2D [] cols = Physics2D.OverlapCircleAll(transform.position, radius);
+       Collider2D [] cols = Physics2D.OverlapCircleAll(transform.position, radius,playerMask);
        if(cols.Length > 0 )
        {
         var script = cols[0].GetComponent<Health>();
         script.curHealth -=10;
-        Debug.Log(cols.Length);
-        Debug.Log("Hit player");
        }
+       jumping = false;
+       resetBackToPosition();
+    }
 
+    public void trashWall()
+    {
+        for(int i = 0; i < 5; i++)
+        {
+            var obj = Instantiate(trashWallTrash, new Vector3(camPos.x + 26.07f,Random.Range(-14,13),0), Quaternion.identity);
+            var rb = obj.AddComponent<Rigidbody2D>();
+            rb.isKinematic = true;
+            rb.velocity = Vector2.left *10;
+        }
     }
 
     public void throwTrash()
@@ -97,5 +150,16 @@ public class TrashBoss : MonoBehaviour
             }
             
                 thrown = true;
+    }
+
+     public void resetBackToPosition()
+    {
+        transform.position = new Vector3(16.88f,-1.26f,0.0f);
+    }
+
+    private void move()
+    {
+        camPos = camScript.currentPos;
+        transform.position = new Vector3(camPos.x +26.07f , 0,0);
     }
 }

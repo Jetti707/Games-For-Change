@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EelNormalAttack : MonoBehaviour
+public class CameraFirstBoss : MonoBehaviour
 {
+
+    public  Vector3 currentPos;
+    [SerializeField]
+    private float camSpeed;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,15 +17,11 @@ public class EelNormalAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+      currentPos = transform.position;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void FixedUpdate()
     {
-        if(other.gameObject.tag == "Enemy")
-        {
-        other.GetComponent<Health>().curHealth -= 100.0f;
-        Destroy(this.gameObject);
-        }
+        transform.Translate(new Vector3(1.0f,0.0f,0.0f) * camSpeed);
     }
 }

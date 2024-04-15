@@ -38,17 +38,12 @@ public class BombAttack : MonoBehaviour
        
     }
 
-    private void OnDrawGizmos()
-        {
-            Gizmos.DrawWireSphere(transform.position, radius);
-        }
-
     void startExplosion()
     {
         if(cols.Length > 0){
             foreach(Collider2D col in cols){
             var script = col.gameObject.GetComponent<Health>();
-            script.curHealth -= 10;
+            script.curHealth -= 500;
         }
         }
         
