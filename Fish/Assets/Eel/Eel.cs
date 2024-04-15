@@ -91,7 +91,7 @@ public class Eel : MonoBehaviour
             var obj = Instantiate(eelAttack,new Vector3(transform.position.x + 2.0f * Movement.facingDirection, transform.position.y + 0.25f,0 ),Quaternion.identity);
             var rb = obj.AddComponent<Rigidbody2D>();
             rb.bodyType = RigidbodyType2D.Kinematic;
-            rb.velocity = new Vector2(1 * Movement.facingDirection,0) * 5;
+            rb.velocity = new Vector2(1 * Movement.facingDirection,0) * 15;
             cooldown = cooldownOrg;
             cooldownOver = false;
             Destroy(obj,2.5f);

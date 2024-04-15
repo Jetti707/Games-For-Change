@@ -20,7 +20,7 @@ public class EelNormalAttack : MonoBehaviour
     {
         if(other.gameObject.tag == "Enemy")
         {
-        other.GetComponent<Health>().curHealth -= 1;
+        other.GetComponent<Health>().curHealth -= 100.0f;
         Destroy(this.gameObject);
         }
     }

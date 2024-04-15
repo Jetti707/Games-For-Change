@@ -11,6 +11,7 @@ public class TrashBoss : MonoBehaviour
     public int numOfObjects;
     public int radius;
     public GameObject Circle;
+    public GameObject trashWallTrash;
     [SerializeField]
     private LayerMask playerMask;
     
@@ -25,6 +26,10 @@ public class TrashBoss : MonoBehaviour
     private float attack1Timer;
     private bool attack1TimerNotOver;
     private bool thrown;
+
+    [SerializeField]
+    private float wallTimer;
+    private float wallTimerOrg = 5.0f;
 
 
     private CameraFirstBoss camScript;
@@ -50,6 +55,17 @@ public class TrashBoss : MonoBehaviour
         move();
         }
 
+        if(wallTimer <= 0)
+        {
+            trashWall();
+            wallTimer = wallTimerOrg;
+        }
+
+        if(wallTimer > 0)
+        {
+            wallTimer -= Time.deltaTime;
+        }
+
 
         if(!thrown && !attack1TimerNotOver)
         {
@@ -61,7 +77,7 @@ public class TrashBoss : MonoBehaviour
             attack1Timer -= Time.deltaTime;
             if(attack1Timer <= 0){
                 attack1TimerNotOver = false;
-                attack1Timer = 3.0f;
+                attack1Timer = 2.5f;
             }
             thrown = false;
         }
@@ -97,7 +113,17 @@ public class TrashBoss : MonoBehaviour
        }
        jumping = false;
        resetBackToPosition();
+    }
 
+    public void trashWall()
+    {
+        for(int i = 0; i < 5; i++)
+        {
+            var obj = Instantiate(trashWallTrash, new Vector3(camPos.x + 26.07f,Random.Range(-14,13),0), Quaternion.identity);
+            var rb = obj.AddComponent<Rigidbody2D>();
+            rb.isKinematic = true;
+            rb.velocity = Vector2.left *10;
+        }
     }
 
     public void throwTrash()

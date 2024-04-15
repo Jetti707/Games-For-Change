@@ -5,7 +5,7 @@ using UnityEngine;
 public class NewBehaviourScript : MonoBehaviour
 {
 
-    public static float damage = 1.0f;
+    public static float damage = 100.0f;
 
     public Health enemy;
     public GameObject obj;

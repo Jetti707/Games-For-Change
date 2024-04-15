@@ -43,7 +43,7 @@ public class BombAttack : MonoBehaviour
         if(cols.Length > 0){
             foreach(Collider2D col in cols){
             var script = col.gameObject.GetComponent<Health>();
-            script.curHealth -= 10;
+            script.curHealth -= 500;
         }
         }
         

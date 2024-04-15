@@ -581,7 +581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ea9955885c3d7249a6d496a7008513e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curHealth: 100
+  curHealth: 10000
 --- !u!114 &1172815085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -594,9 +594,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 115748d553884894b8921c7601192035, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numOfObjects: 10
+  numOfObjects: 15
   radius: 5
   Circle: {fileID: 5728294398213581337, guid: 89f9b3871e4e4d64aa090aed0429dc20, type: 3}
+  trashWallTrash: {fileID: 8529951220330910422, guid: cacbb3444c4826d45b745d25afea6f8b, type: 3}
   playerMask:
     serializedVersion: 2
     m_Bits: 64
@@ -604,6 +605,7 @@ MonoBehaviour:
   jumpCoolOrg: 10
   jumping: 0
   attack1Timer: 0
+  wallTimer: 0
 --- !u!212 &1172815086
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1416,7 +1418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentPos: {x: 0, y: 0, z: 0}
-  camSpeed: 0.04
+  camSpeed: 0.06
 --- !u!1 &1853755405 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7573629866540185745, guid: 0586b973311e6634b8192860e353ab8d, type: 3}
@@ -1435,7 +1437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   howLongHeld: 0
-  cooldownOrg: 0.75
+  cooldownOrg: 0.35
   eelAttack: {fileID: 2378205941548003001, guid: 994c115bf7b02b54b90d246c5296d923, type: 3}
   Enemies:
     serializedVersion: 2
